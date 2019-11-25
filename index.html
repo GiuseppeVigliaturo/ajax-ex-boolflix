@@ -10,6 +10,26 @@
   </head>
   <body>
 
+    <div class="searchbar">
+      <input class="inputmovie" type="text" name="" value="">
+      <button class="btnsearch" type="button" name="button">Cerca</button>
+    </div>
+
+    <div class="content">
+
+    </div>
+
+
+    <script id="entry-template" type="text/x-handlebars-template">
+    <div class="entry">
+      <p class="title">{{titolo}}</p>
+      <p class="org_title">{{originale_titolo}}</p>
+      <p class="lng">{{originale_lingua}}</p>
+      <p class="voto">{{votomedio}}</p>
+    </div>
+  </script>
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
