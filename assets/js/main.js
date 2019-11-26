@@ -1,5 +1,10 @@
 var moviesearch;
+var starpiene;
+var starvuote;
+var voto;
 $(".btnsearch").click(function(){
+
+  $(".content").html(" ");
   //al click sul bottone prendo il valore dell'input e lo salvo in una variabile
   moviesearch= $(".inputmovie").val();
   console.log(moviesearch);
@@ -7,9 +12,7 @@ $(".btnsearch").click(function(){
   chiamatapi(moviesearch);
   //dopo aver effetuato la chiamatapi ripulisco la searchbar
   $(".inputmovie").val(" ");
-
-
-  });
+});
 
   //FUNZIONI
 
@@ -27,7 +30,10 @@ function chiamatapi(film)
 
             //con un ciclo attraverso il contenuto della variabile contenente
             //le info del film e stampo ciò che mi serve
-            store.forEach(myFunction);
+            store.forEach(print);
+            //con il foreach come parametro la funzione prende ciò che è prima del punto
+            // starpiene = stellinepiene(voto);
+            // starvuote = stellinevuote(voto);
 
           },
 
@@ -37,7 +43,7 @@ function chiamatapi(film)
            }); //fine funzione ajax
   }
 
-  function myFunction(item) {
+  function print(item) {
 
 
       console.log(item.title);
@@ -47,7 +53,10 @@ function chiamatapi(film)
        console.log(item.original_language);
       var orglingua = item.original_language;
       console.log(item.vote_average);
-      var voto = item.vote_average;
+      voto = parseInt(item.vote_average * 0.5);
+       starpiene = stellinepiene(voto);
+       starvuote = stellinevuote(voto);
+
 
       var source = document.getElementById("entry-template").innerHTML;
       var template = Handlebars.compile(source);
@@ -55,11 +64,28 @@ function chiamatapi(film)
       var context = { titolo:"Titolo: "+titolofilm ,
                      originale_titolo:"Originale: "+orgtitolo,
                      originale_lingua:"Lingua: "+orglingua,
-                     votomedio:"voto: "+voto };
+                     votomedio:"voto: " + starpiene + starvuote
+                    };
       var html = template(context);
-
-        // $(".content").append(html);
 
       $(".content").append('<div class="item">'+ html +'</div>');
 
   }
+
+
+
+//stampo tante stelline quanto è il voto
+function stellinepiene(voto){
+  for (var i = 0; i < voto; i++) {
+    console.log(i);
+    $(".voto").append('<i class="fas fa-star">'+ '</i>');
+  }
+}
+
+//stampo tante stelline vuote fino ad arrivare a 5
+function stellinevuote(voto){
+  for (var i = 0; i < (5 - voto); i++) {
+    console.log(i);
+    $(".voto").append('<i class="far fa-star">'+ '</i>');
+  }
+}
