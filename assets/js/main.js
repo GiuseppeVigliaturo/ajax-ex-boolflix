@@ -1,7 +1,4 @@
-var moviesearch, serietv;
-var starpiene;
-var starvuote;
-var voto;
+var moviesearch, serietv,starpiene,starvuote,voto;
 
 $(".btnsearch").click(function(){
 
@@ -74,7 +71,7 @@ function chiamatapi(film)
 
   function print(item) {
 
-
+      var locandina = item.backdrop_path;
       console.log(item.title);
       var titolofilm = item.title;
       console.log(item.original_title);
@@ -90,8 +87,11 @@ function chiamatapi(film)
 
       var source = document.getElementById("entry-template").innerHTML;
       var template = Handlebars.compile(source);
+      // https://image.tmdb.org/t/p/w185/s2VDcsMh9ZhjFUxw77uCFDpTuXp.jpg
 
-      var context = { titolo:"Titolo: "+titolofilm ,
+      var context = {
+                    copertina: "https://image.tmdb.org/t/p/w185"+locandina,
+                    titolo:"Titolo: "+titolofilm ,
                      originale_titolo:"Originale: "+orgtitolo,
                      originale_lingua: bandiera,
                      votomedio:"voto: " ,
@@ -102,11 +102,12 @@ function chiamatapi(film)
 
       $(".contentfilm").append('<div class="item">'+ html +'</div>');
 
+
   }
 
   function printserietv(item) {
 
-
+      var locandina = item.backdrop_path;
       var nome = item.name;
       var orgtitolo = item.original_name;
        console.log(item.original_language);
@@ -121,7 +122,9 @@ function chiamatapi(film)
       var source = document.getElementById("entry-template").innerHTML;
       var template = Handlebars.compile(source);
 
-      var context = {titolo: "Titolo "+ nome,
+      var context = {
+                    copertina: "https://image.tmdb.org/t/p/w185"+locandina,
+                    titolo: "Titolo "+ nome,
                      originale_titolo:"Originale: "+orgtitolo,
                      originale_lingua: bandiera,
                      votomedio:"voto: " ,

@@ -32,16 +32,23 @@
 
 
     <script id="entry-template" type="text/x-handlebars-template">
-    <div class="entry">
-      <p class="title">{{titolo}}</p>
-      <p class="org_title">{{originale_titolo}}</p>
-      <span class="lng"> <img class="tongue" src="{{originale_lingua}}" alt="flag"> </span>
-      <p class="voto">{{votomedio}} </p>
-      <span class ="star"> {{{stariconp}}}</span>
-      <span class ="star"> {{{stariconv}}}</span>
+
+        <div class="entry">
+          <img class="locandina" src="{{copertina}}" alt="imgcopertina">
+          <div class="infobox">
+            <p class="title">{{titolo}}</p>
+            <p class="org_title">{{originale_titolo}}</p>
+            <span class="lng"> <img class="tongue" src="{{originale_lingua}}" alt="flag"> </span>
+            <p class="voto">{{votomedio}} </p>
+            <span class ="star"> {{{stariconp}}}</span>
+            <span class ="star"> {{{stariconv}}}</span>
+
+          </div>
+
+        </div>
 
 
-    </div>
+
   </script>
 
 
