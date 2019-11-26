@@ -15,20 +15,32 @@
       <button class="btnsearch" type="button" name="button">Cerca</button>
     </div>
 
-    <i class="fas fa-star"></i> //stellina piena
-    <i class="far fa-star"></i> //stellina vuota
-
-    <div class="content">
+  <div class="film">
+    <h2>FILM</h2>
+    <div class="contentfilm">
 
     </div>
+  </div>
+
+  <div class="serietv">
+    <h2>SERIETV</h2>
+    <div class="contentserie">
+
+    </div>
+  </div>
+
 
 
     <script id="entry-template" type="text/x-handlebars-template">
     <div class="entry">
       <p class="title">{{titolo}}</p>
       <p class="org_title">{{originale_titolo}}</p>
-      <p class="lng">{{originale_lingua}}</p>
-      <p class="voto">{{votomedio}}</p>
+      <span class="lng"> <img class="tongue" src="{{originale_lingua}}" alt="flag"> </span>
+      <p class="voto">{{votomedio}} </p>
+      <span class ="star"> {{{stariconp}}}</span>
+      <span class ="star"> {{{stariconv}}}</span>
+
+
     </div>
   </script>
 

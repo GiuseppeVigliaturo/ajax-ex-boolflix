@@ -2,24 +2,42 @@
 {
   background-color: rgb(133, 179, 201);
 } */
+.tongue
+{
+  width: 20%;
+  height: auto;
+}
 .searchbar
 {
   display: flex;
   justify-content: center;
   margin: 40px;
 }
-.content
+.contentfilm
 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-
+  width: 100vw;
+  height: 50vh;
+  overflow-y: scroll;
+  margin-bottom: 20px;
+}
+.contentserie
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 45vh;
+  overflow-y: scroll;
 }
 .item
 {
-  margin: 20px;
-  width: 150px;
+  margin: 10px;
+  width: 200px;
   height: auto;
   border: 2px solid black;
 }
