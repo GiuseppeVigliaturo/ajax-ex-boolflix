@@ -12,7 +12,8 @@ $(".btnsearch").click(function(){
   chiamatapi(moviesearch);
   chiamatapiserietv(serietv);
   //dopo aver effetuato la chiamatapi ripulisco la searchbar
-
+moviesearch= $(".inputmovie").val(" ");
+serietv= $(".inputmovie").val(" ");
 });
 
   //FUNZIONI
