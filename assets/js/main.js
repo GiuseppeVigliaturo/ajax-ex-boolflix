@@ -71,7 +71,12 @@ function chiamatapi(film)
 
   function print(item) {
 
-      var locandina = item.backdrop_path;
+    // if (type == "movie") {
+    //
+    // }
+    // else
+
+      var locandina = item.poster_path;
       console.log(item.title);
       var titolofilm = item.title;
       console.log(item.original_title);
@@ -87,7 +92,6 @@ function chiamatapi(film)
 
       var source = document.getElementById("entry-template").innerHTML;
       var template = Handlebars.compile(source);
-      // https://image.tmdb.org/t/p/w185/s2VDcsMh9ZhjFUxw77uCFDpTuXp.jpg
 
       var context = {
                     copertina: "https://image.tmdb.org/t/p/w185"+locandina,
@@ -107,7 +111,7 @@ function chiamatapi(film)
 
   function printserietv(item) {
 
-      var locandina = item.backdrop_path;
+      var locandina = item.poster_path;
       var nome = item.name;
       var orgtitolo = item.original_name;
        console.log(item.original_language);
@@ -148,7 +152,7 @@ function stellinepiene(voto){
     //alla fine stampare il numero di stelle corretto
     starfull += '<i class="fas fa-star"></i>';
   }
-  return starfull
+  return starfull;
 }
 
 //stampo tante stelline vuote fino ad arrivare a 5
@@ -165,23 +169,29 @@ function stellinevuote(voto){
 
 //rimpiazzo la lingua con la bandiera del paese corrispondente
 function flagFunction(orglingua){
-var flag = '';
-  switch(orglingua) {
-    case "en":
-      flag= "assets/img/uk.png";
-      break;
-    case "fr":
-      flag= "assets/img/fr.png";
-      break;
-    case "ja":
-      flag= "assets/img/jp.png";
-      break;
-     case "it":
-      flag= "assets/img/it.png";
-      break;
-    default:
-      flag ="bandiera";
+// var flag = '';
+//   switch(orglingua) {
+//     case "en":
+//       flag= "assets/img/uk.png";
+//       break;
+//     case "fr":
+//       flag= "assets/img/fr.png";
+//       break;
+//     case "jp":
+//       flag= "assets/img/jp.png";
+//       break;
+//      case "it":
+//       flag= "assets/img/it.png";
+//       break;
+//     default:
+//       flag ="bandiera";
+//   }
+//   return flag;
+  //oppure uso un array
+  var flag ="";
+  var listalingue = ["en","fr","ja","it","es","cn"];
+  if (listalingue.includes(orglingua)) {
+      flag = "assets/img/"+ orglingua +".png";
   }
   return flag;
-
 }

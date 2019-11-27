@@ -1,4 +1,20 @@
-
+body{
+  background-color: black;
+  color: red;
+}
+header
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: red;
+  background-color: black;
+  border-bottom: 5px solid rgb(142, 22, 6);
+}
+header .logo
+{
+  margin: 10px;
+}
 .tongue
 {
   width: 30px;
@@ -8,7 +24,7 @@
 {
   display: flex;
   justify-content: center;
-  margin: 40px;
+  margin: 20px;
 }
 .contentfilm
 {
@@ -17,7 +33,7 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 100vw;
-  height: 45vh;
+  height: 60vh;
   overflow-y: scroll;
   margin-bottom: 20px;
 }
@@ -28,7 +44,7 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 100vw;
-  height: 45vh;
+  height: 60vh;
   overflow-y: scroll;
 }
 .entry
@@ -45,10 +61,13 @@
 {
   position: relative;
   overflow: hidden;
-  margin: 10px;
-  width: 280px;
-  height: 250px;
-  border: 2px solid black;
+  margin: 20px;
+  width: 320px;
+  min-width: 280px;
+  height: 330px;
+  min-height: 290px;
+  border: 2px solid red;
+  border-radius: 5%;
 }
 
 .entry .infobox
@@ -60,6 +79,7 @@ width: 100%;
 height: 100%;
 background: #111;
 color:#fff;
+opacity: 0.9;
 transition: 1.5s ease-in-out;
 transform: translateY(100%);
 padding: 10px;
@@ -68,4 +88,12 @@ padding: 10px;
 .item:hover .entry .infobox
 {
 transform: translateY(0);
+}
+.film 
+{
+  text-align: center;
+}
+.serietv
+{
+  text-align: center;
 }
