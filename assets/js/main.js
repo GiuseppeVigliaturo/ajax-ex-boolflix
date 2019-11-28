@@ -8,9 +8,11 @@ $(".btnsearch").click(function(){
   moviesearch= $(".inputmovie").val();
   console.log(moviesearch);
   serietv= $(".inputmovie").val();
+  var urltv = "https://api.themoviedb.org/3/search/tv";
+  var urlfilm = "https://api.themoviedb.org/3/search/movie";
 
-  chiamatapi(moviesearch);
-  chiamatapiserietv(serietv);
+  chiamatapi(moviesearch,urlfilm,"movie");
+  chiamatapi(serietv,urltv,"tv");
   //dopo aver effetuato la chiamatapi ripulisco la searchbar
   moviesearch= $(".inputmovie").val(" ");
   serietv= $(".inputmovie").val(" ");
@@ -19,15 +21,15 @@ $(".btnsearch").click(function(){
   //FUNZIONI
 
 
-function chiamatapiserietv(film)
+function chiamatapi(richiesta,url,type)
   {
     $.ajax({
 
-          url : "https://api.themoviedb.org/3/search/tv",
+          url : url,
           data:{
             api_key:"510cf020dbf7095ebfbc5325b6590d69",
             language:"it_IT",
-            query:film
+            query:richiesta
           },
           method : "GET",
           success : function (data,stato) {
@@ -38,7 +40,9 @@ function chiamatapiserietv(film)
 
             //con un ciclo attraverso il contenuto della variabile contenente
             //le info del film e stampo ciò che mi serve
-            store.forEach(printserietv);
+            // store.forEach(printserietv);
+            store.forEach(print(store,type));
+
             //con il foreach come parametro la funzione prende ciò che è prima del punto
 
           },
@@ -50,44 +54,47 @@ function chiamatapiserietv(film)
   }
 
 
-function chiamatapi(film)
-  {
-    $.ajax({
+// function chiamatapi(richiesta,url,type)
+//   {
+//     $.ajax({
+//
+//           url : url,
+//           data:{
+//             api_key:"510cf020dbf7095ebfbc5325b6590d69",
+//             language:"it_IT",
+//             query:richiesta
+//           },
+//           method : "GET",
+//           success : function (data,stato) {
+//             //salvo il contenuto relativo al film in una variabile
+//             var store = data.results;
+//             console.log(store);
+//             console.log(stato);
+//
+//             //con un ciclo attraverso il contenuto della variabile contenente
+//             //le info del film e stampo ciò che mi serve
+//             // store.forEach(print);
+//             for (var i = 0; i < store.length; i++) {
+//               print(store[i],type);
+//             }
+//             //con il foreach come parametro la funzione prende ciò che è prima del punto
+//
+//           },
+//
+//           error : function (errore) {
+//                alert("E' avvenuto un errore. "+errore);
+//              }
+//            }); //fine funzione ajax
+//   }
 
-          url : "https://api.themoviedb.org/3/search/movie",
-          data:{
-            api_key:"510cf020dbf7095ebfbc5325b6590d69",
-            language:"it_IT",
-            query:film
-          },
-          method : "GET",
-          success : function (data,stato) {
-            //salvo il contenuto relativo al film in una variabile
-            var store = data.results;
-            console.log(store);
-            console.log(stato);
+  function print(item,type) {
 
-            //con un ciclo attraverso il contenuto della variabile contenente
-            //le info del film e stampo ciò che mi serve
-            store.forEach(print);
-            //con il foreach come parametro la funzione prende ciò che è prima del punto
-
-          },
-
-          error : function (errore) {
-               alert("E' avvenuto un errore. "+errore);
-             }
-           }); //fine funzione ajax
-  }
-
-  function print(item) {
+    var titolofilm = (type == "movie" ? item.title : item.name);
+		var orgtitolo = (type == "movie" ? item.original_title : item.original_name);
 
 
       var locandina = item.poster_path;
-      console.log(item.title);
-      var titolofilm = item.title;
-      console.log(item.original_title);
-      var orgtitolo = item.original_title;
+
        console.log(item.original_language);
       var orglingua = item.original_language;
       var bandiera = flagFunction(orglingua);
@@ -111,41 +118,47 @@ function chiamatapi(film)
                     };
       var html = template(context);
 
-      $(".contentfilm").append('<div class="item">'+ html +'</div>');
-
-
-  }
-
-  function printserietv(item) {
-
-      var locandina = item.poster_path;
-      var nome = item.name;
-      var orgtitolo = item.original_name;
-       console.log(item.original_language);
-      var orglingua = item.original_language;
-      var bandiera = flagFunction(orglingua);
-      console.log(item.vote_average);
-      voto = parseInt(item.vote_average * 0.5);
-       star = stelle(voto);
-
-
-
-      var source = document.getElementById("entry-template").innerHTML;
-      var template = Handlebars.compile(source);
-
-      var context = {
-                    copertina: "https://image.tmdb.org/t/p/w342"+locandina,
-                    titolo: "Titolo "+ nome,
-                     originale_titolo:"Originale: "+orgtitolo,
-                     originale_lingua: bandiera,
-                     votomedio:"voto: " ,
-                     stariconp: star
-                    };
-      var html = template(context);
-
-      $(".contentserie").append('<div class="item">'+ html +'</div>');
+      if (type =="movie") {
+        $(".contentfilm").append('<div class="item">'+ html +'</div>');
+      }
+      else {
+        $(".contentserie").append('<div class="item">'+ html +'</div>');
+      }
 
   }
+
+  // function printserietv(item,type) {
+  //
+  //   var titolofilm = (type == "movie" ? item.title : item.name);
+	// 	var orgtitolo = (type == "movie" ? item.original_title : item.original_name);
+  //
+  //     var locandina = item.poster_path;
+  //
+  //     var orglingua = item.original_language;
+  //     var bandiera = flagFunction(orglingua);
+  //     console.log(item.vote_average);
+  //     voto = parseInt(item.vote_average * 0.5);
+  //      star = stelle(voto);
+  //
+  //
+  //
+  //     var source = document.getElementById("entry-template").innerHTML;
+  //     var template = Handlebars.compile(source);
+  //
+  //     var context = {
+  //                   copertina: "https://image.tmdb.org/t/p/w342"+locandina,
+  //                   titolo: "Titolo "+ titolofilm,
+  //                    originale_titolo:"Originale: "+orgtitolo,
+  //                    originale_lingua: bandiera,
+  //                    votomedio:"voto: " ,
+  //                    stariconp: star
+  //                   };
+  //     var html = template(context);
+  //
+  //
+  //     $(".contentserie").append('<div class="item">'+ html +'</div>');
+  //
+  // }
 
 
 

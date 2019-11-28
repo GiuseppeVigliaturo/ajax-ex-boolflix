@@ -66,6 +66,9 @@ header .logo
 }
 .item
 {
+  background-image: url("../img/sfondo5.jpeg");
+  background-repeat: no-repeat;
+  background-size:cover ;
   position: relative;
   overflow: hidden;
   margin: 20px;
