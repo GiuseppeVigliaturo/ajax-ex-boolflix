@@ -12,8 +12,8 @@ $(".btnsearch").click(function(){
   chiamatapi(moviesearch);
   chiamatapiserietv(serietv);
   //dopo aver effetuato la chiamatapi ripulisco la searchbar
-moviesearch= $(".inputmovie").val(" ");
-serietv= $(".inputmovie").val(" ");
+  moviesearch= $(".inputmovie").val(" ");
+  serietv= $(".inputmovie").val(" ");
 });
 
   //FUNZIONI
@@ -23,7 +23,12 @@ function chiamatapiserietv(film)
   {
     $.ajax({
 
-          url : "https://api.themoviedb.org/3/search/tv?api_key=510cf020dbf7095ebfbc5325b6590d69&language=it_IT&query="+ film,
+          url : "https://api.themoviedb.org/3/search/tv",
+          data:{
+            api_key:"510cf020dbf7095ebfbc5325b6590d69",
+            language:"it_IT",
+            query:film
+          },
           method : "GET",
           success : function (data,stato) {
             //salvo il contenuto relativo alla serietv in una variabile
@@ -49,7 +54,12 @@ function chiamatapi(film)
   {
     $.ajax({
 
-          url : "https://api.themoviedb.org/3/search/movie?api_key=510cf020dbf7095ebfbc5325b6590d69&query=" + film,
+          url : "https://api.themoviedb.org/3/search/movie",
+          data:{
+            api_key:"510cf020dbf7095ebfbc5325b6590d69",
+            language:"it_IT",
+            query:film
+          },
           method : "GET",
           success : function (data,stato) {
             //salvo il contenuto relativo al film in una variabile
@@ -72,10 +82,6 @@ function chiamatapi(film)
 
   function print(item) {
 
-    // if (type == "movie") {
-    //
-    // }
-    // else
 
       var locandina = item.poster_path;
       console.log(item.title);
@@ -87,21 +93,21 @@ function chiamatapi(film)
       var bandiera = flagFunction(orglingua);
       console.log(item.vote_average);
       voto = parseInt(item.vote_average * 0.5);
-       starpiene = stellinepiene(voto);
-       starvuote = stellinevuote(voto);
+       star = stelle(voto);
+
 
 
       var source = document.getElementById("entry-template").innerHTML;
       var template = Handlebars.compile(source);
 
       var context = {
-                    copertina: "https://image.tmdb.org/t/p/w185"+locandina,
+                    copertina: "https://image.tmdb.org/t/p/w342"+locandina,
                     titolo:"Titolo: "+titolofilm ,
                      originale_titolo:"Originale: "+orgtitolo,
                      originale_lingua: bandiera,
                      votomedio:"voto: " ,
-                     stariconp: starpiene,
-                     stariconv: starvuote
+                     stariconp: star
+
                     };
       var html = template(context);
 
@@ -120,21 +126,20 @@ function chiamatapi(film)
       var bandiera = flagFunction(orglingua);
       console.log(item.vote_average);
       voto = parseInt(item.vote_average * 0.5);
-       starpiene = stellinepiene(voto);
-       starvuote = stellinevuote(voto);
+       star = stelle(voto);
+
 
 
       var source = document.getElementById("entry-template").innerHTML;
       var template = Handlebars.compile(source);
 
       var context = {
-                    copertina: "https://image.tmdb.org/t/p/w185"+locandina,
+                    copertina: "https://image.tmdb.org/t/p/w342"+locandina,
                     titolo: "Titolo "+ nome,
                      originale_titolo:"Originale: "+orgtitolo,
                      originale_lingua: bandiera,
                      votomedio:"voto: " ,
-                     stariconp: starpiene,
-                     stariconv: starvuote
+                     stariconp: star
                     };
       var html = template(context);
 
@@ -145,28 +150,31 @@ function chiamatapi(film)
 
 
 //stampo tante stelline quanto è il voto
-function stellinepiene(voto){
-  var starfull = "";
-  for (var i = 0; i < voto; i++) {
+function stelle(voto){
+  var star = "";
+  for (var i = 0; i < 5; i++) {
     //dovrei andare a valorizzare nel for di volta in volta una variabile e poi fuori
     // dal for farmela restituire cosi da sovrascriverla ogni volta e quindi
     //alla fine stampare il numero di stelle corretto
-    starfull += '<i class="fas fa-star"></i>';
+    star += i <= voto ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+
   }
-  return starfull;
+  return star;
 }
 
-//stampo tante stelline vuote fino ad arrivare a 5
-function stellinevuote(voto){
-  var starempty = "";
 
-  for (var j = 0; j < (5 - voto); j++) {
-    console.log(j);
-    starempty += '<i class="far fa-star"></i>';
-  }
-    return starempty
 
-}
+// //stampo tante stelline vuote fino ad arrivare a 5
+// function stellinevuote(voto){
+//   var starempty = "";
+//
+//   for (var j = 0; j < (5 - voto); j++) {
+//     console.log(j);
+//     starempty += '<i class="far fa-star"></i>';
+//   }
+//     return starempty
+//
+// }
 
 //rimpiazzo la lingua con la bandiera del paese corrispondente
 function flagFunction(orglingua){
