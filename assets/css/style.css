@@ -33,6 +33,9 @@ header .logo
   justify-content: center;
   margin: 20px;
 }
+
+/* per avere le card dei vari film che scorrono in verticale e una di fianco
+all'altra */
 .contentfilm
 {
   display: flex;
@@ -64,13 +67,15 @@ header .logo
   width: 100%;
   height: 100%;
 }
+
+/* assegno un'immagine di default nel caso manchi la copertina della serie o del film */
 .item
 {
   background-image: url("../img/sfondo5.jpeg");
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size:cover ;
   position: relative;
-  overflow: hidden;
+  overflow:hidden;
   margin: 20px;
   width: 320px;
   min-width: 280px;
@@ -80,6 +85,8 @@ header .logo
   border-radius: 5%;
 }
 
+/* per avere l'effetto di apparizione uso translate 100% che mi sposta il contenuto
+sotto e poi all'hover lo riporto nella sua posizione */
 .entry .infobox
 {
 position: absolute;
@@ -93,6 +100,7 @@ opacity: 0.9;
 transition: 1.5s ease-in-out;
 transform: translateY(100%);
 padding: 10px;
+overflow-y: auto;
 }
 
 .item:hover .entry .infobox

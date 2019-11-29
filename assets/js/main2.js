@@ -1,15 +1,17 @@
-var moviesearch, serietv,search,starpiene,starvuote,voto;
+var moviesearch, serietv,search,starpiene,starvuote,voto,info;
 
 $(".btnsearch").click(function(){
-
+//ad ogni click ripulisco lo schermo
   $(".contentserie").html(" ");
   $(".contentfilm").html(" ");
   //al click sul bottone prendo il valore dell'input e lo salvo in una variabile
   search= $(".inputmovie").val();
   console.log(moviesearch);
+  // per poter avere un'unica funzione tratto l'url come un parametro il cui valore assegno ad una variabile
   var urltv = "https://api.themoviedb.org/3/search/tv";
   var urlfilm = "https://api.themoviedb.org/3/search/movie";
 
+//effettuo la chiamata all'api
   chiamatapi(search,urlfilm,"movie");
   chiamatapi(search,urltv,"tv");
   //dopo aver effetuato la chiamatapi ripulisco la searchbar
@@ -52,6 +54,7 @@ function chiamatapi(richiesta,url,type)
            }); //fine funzione ajax
   }
 
+//funzione che prende i dati dall'array e li stampa nelle rispettive card
 
   function print(item,type) {
 
@@ -67,6 +70,8 @@ function chiamatapi(richiesta,url,type)
       var orglingua = item.original_language;
       var bandiera = flagFunction(orglingua);
       console.log(item.vote_average);
+      info = item.overview;
+
       voto = parseInt(item.vote_average * 0.5);
        star = stelle(voto);
 
@@ -80,11 +85,14 @@ function chiamatapi(richiesta,url,type)
                     titolo:"Titolo: "+titolofilm ,
                      originale_titolo:"Originale: "+orgtitolo,
                      originale_lingua: bandiera,
+                     trama: info,
                      votomedio:"voto: " ,
                      stariconp: star
 
                     };
       var html = template(context);
+
+      //a seconda del type specificato faccio stampare la card nel contenitore corrispondente
 
       if (type =="movie") {
         $(".contentfilm").append('<div class="item">'+ html +'</div>');
@@ -103,6 +111,7 @@ function stelle(voto){
     // dal for farmela restituire cosi da sovrascriverla ogni volta e quindi
     //alla fine stampare il numero di stelle corretto
     star += i <= voto ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+    //operatore ternario, 1.condizione 2.se 1 vero allora fai questo 3.se 1 falso allora fai questo
 
   }
   return star;
