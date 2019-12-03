@@ -40,22 +40,22 @@ all'altra */
 {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+  /* justify-content: center; */
+  /* flex-wrap: wrap; */
   width: 100vw;
   height: 60vh;
-  overflow-y: scroll;
+  overflow-x: auto;
   margin-bottom: 20px;
 }
 .contentserie
 {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+  /* justify-content: center; */
+  /* flex-wrap: wrap; */
   width: 100vw;
   height: 60vh;
-  overflow-y: scroll;
+  overflow-x: auto;
 }
 .entry
 {
@@ -100,7 +100,7 @@ opacity: 0.9;
 transition: 1.5s ease-in-out;
 transform: translateY(100%);
 padding: 10px;
-overflow-y: auto;
+overflow-y: scroll;
 }
 
 .item:hover .entry .infobox
@@ -136,4 +136,20 @@ transform: translateY(0);
   background-color: white;
   text-align: center;
   border-radius: 8px;
+}
+
+::-webkit-scrollbar {
+ width: 6px;
+}
+
+::-webkit-scrollbar-track {
+ background: black;
+}
+
+::-webkit-scrollbar-thumb {
+ background: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+ background: #DB202C;
 }

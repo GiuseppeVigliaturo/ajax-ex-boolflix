@@ -41,6 +41,14 @@ function chiamatapi(richiesta,url,type)
             //con un ciclo attraverso il contenuto della variabile contenente
             //le info del film e stampo ciò che mi serve
 
+
+                // store.forEach(myFunction);
+                //
+                // function myFunction(item) {
+                //
+                //     print(item,type);
+                // }
+            
             for (var i = 0; i < store.length; i++) {
               print(store[i],type);
             }
